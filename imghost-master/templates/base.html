@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+      {% block head %}
+      <title>{% block title %}{{ page_title }}{% endblock %}</title>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" type="text/css" href="/static/style.css" />
+      <link rel="stylesheet" type="text/css" href="/static/bootstrap.css" />
+      <link rel="stylesheet" type="text/css" href="/static/bootstrap-responsive.css" />
+      <link rel="stylesheet" type="text/css" href="/static/colorbox.css" />
+      <link rel="stylesheet" type="text/css" href="/static/centertabs.css" />
+
+      <script type="text/javascript" src="/static/jquery-1.7.1.min.js"></script>
+      <script type="text/javascript" src="/static/jquery.colorbox-min.js"></script>
+      <script src="/static/bootstrap-tab.js"></script>
+      {% endblock %}
+  </head>
+
+  <body style="padding-top:50px;">
+      {% block body %}
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+				  <h3><a class="brand" href="/">imghost</a></h3>
+            <ul class="nav">
+              <li><a href="/upload">Upload</a></li>
+              <li><a href="/list">List</a></li>
+            </ul>
+
+            {% if user.is_authenticated %}
+            <ul class="nav pull-right">
+              {% if user.is_staff %}<li><a href="/admin/">Admin</a></li>{% endif %}
+              <li><a href="/logout">Logout ({{ user.username }})</a></li>
+            </ul>
+            {% else %}
+            <form method="post" action="/login" class="navbar-form pull-right">
+              {% csrf_token %}            
+              <input type="text" name="username" placeholder="username" class="input-small" />
+              <input type="password" name="password" placeholder="password" class="input-small" />
+              <input type="hidden" name="next" value="{{ next }}" />
+              <button type="submit" class="btn">Login</button>
+            </form>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        {% block content %}{% endblock %}
+
+        <div class="footer" style="text-align:center;padding-top:40px;">
+          <a href="https://github.com/ryands/imghost">github</a> +
+          <a href="http://djangoproject.com/">django</a>
+          <p>&copy; 2010-2011</p>
+       </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

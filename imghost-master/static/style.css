@@ -1,0 +1,32 @@
+div.image {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+div.image h5 {
+  text-align: center;
+}
+
+div.image:hover {
+    background: #eee;
+    border: 1px solid #ccc;
+}
+
+div.image .imgholder {
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  width:150px;
+  height:150px;
+
+  vertical-align:middle;
+  text-align: center;
+}
+
+div.image ul {
+	text-align: left;
+}
+
+div.image a.imglink img {
+}
+
